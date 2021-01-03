@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
+import Zoom from 'react-reveal/Zoom';
 
 // Custom Hooks
 import { useInterval } from '../hooks/useInterval';
@@ -102,27 +103,31 @@ const Tetris = () => {
 			onKeyUp={keyUp}
 		>
 			<StyledTetris>
-				<aside className='box_info'>
-					<h2>Tetris Game</h2>
-					<div>
-						<p>Created by</p>
-						<p>Franco Ortiz</p>
-					</div>
-					<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer'> ~ Repository ~ </a>
-				</aside>
+				<Zoom left>
+					<aside className='box_info'>
+						<h2>Tetris Game</h2>
+						<div>
+							<p>Created by</p>
+							<p>Franco Ortiz</p>
+						</div>
+						<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer'> ~ Repository ~ </a>
+					</aside>
+				</Zoom>
 				<Stage stage={stage} />
-				<aside>
-					{gameOver ? (
-						<Display gameOver={gameOver} text="Game Over" />
-					) : (
-							<div>
-								<Display text={`Score: ${score}`} />
-								<Display text={`rows: ${rows}`} />
-								<Display text={`Level: ${level}`} />
-							</div>
-						)}
-					<StartButton callback={startGame} />
-				</aside>
+				<Zoom right>
+					<aside>
+						{gameOver ? (
+							<Display gameOver={gameOver} text="Game Over" />
+						) : (
+								<div>
+									<Display text={`Score: ${score}`} />
+									<Display text={`rows: ${rows}`} />
+									<Display text={`Level: ${level}`} />
+								</div>
+							)}
+						<StartButton callback={startGame} />
+					</aside>
+				</Zoom>
 			</StyledTetris>
 		</StyledTetrisWrapper>
 	);
