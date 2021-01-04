@@ -10,6 +10,7 @@ export const StyledTetrisWrapper = styled.div`
 
 export const StyledTetris = styled.div`
 	display: flex;
+	flex-direction: row-reverse;
 	align-items: flex-start;
 	justify-content: center;
 	padding: 40px;
@@ -20,39 +21,49 @@ export const StyledTetris = styled.div`
 		width: 100%;
 		max-width: 200px;
 		display: block;
-		padding: 0 20px;
+		margin-right: 3em;
 	}
 
-	.box_info{
+	.info_container{
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: space-around;
-		box-sizing: border-box;
-		border: 3px solid #2a9d8f;
-		border-radius: 20px;
-		margin-right: 2em;
-		padding: 1em;
-		background-color: rgba(42, 157, 143,0.6);
-		color: white;
-		
-		p {
-			text-align: center;
-			margin: -0.1em;
+		justify-content: space-between;
+		margin-left: 3em;
 
-			&:last-child{
-				margin-bottom: 0.5em;
-			}
-		}
-
-		a {
-			margin-bottom: 1em;
-			text-decoration: none;
+		.box_info{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-around;
+			box-sizing: border-box;
+			border: 3px solid #2a9d8f;
+			border-radius: 20px;
+			margin-bottom: 2em;
+			padding: 1em;
+			background-color: rgba(42, 157, 143,0.6);
 			color: white;
-			font-weight: 600;
+			
+			p {
+				text-align: center;
+				margin: -0.1em;
+	
+				&:last-child{
+					margin-bottom: 0.5em;
+				}
+			}
+			.controls{
+				display:flex;
+			}
 
-			&:hover {
-				color: #E9C46A;
+			a {
+				margin-bottom: 1em;
+				text-decoration: none;
+				color: white;
+				font-weight: 600;
+	
+				&:hover {
+					color: #E9C46A;
+				}
 			}
 		}
 	}

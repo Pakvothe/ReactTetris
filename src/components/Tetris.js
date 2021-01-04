@@ -104,14 +104,25 @@ const Tetris = () => {
 		>
 			<StyledTetris>
 				<Zoom left>
-					<aside className='box_info'>
-						<h2>Tetris Game</h2>
-						<div>
-							<p>Created by</p>
-							<p>Franco Ortiz</p>
-						</div>
-						<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer'> ~ Repository ~ </a>
-					</aside>
+					<div className='info_container'>
+						<aside className='box_info'>
+							<h2>Tetris Game</h2>
+							<div>
+								<p>Created by</p>
+								<p>Franco Ortiz</p>
+							</div>
+							<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer'> ~ Repository ~ </a>
+						</aside>
+						<aside className='box_info'>
+							<h2>Controls</h2>
+							<div>
+								<p className='controls'><span>⇧ </span> = Spin Tetromino</p>
+								<p className='controls'><span>⇩ </span> = Fast Fall</p>
+								<p className='controls'><span>⇨ </span> = Right</p>
+								<p className='controls'><span>⇦ </span> = Left</p>
+							</div>
+						</aside>
+					</div>
 				</Zoom>
 				<Stage stage={stage} />
 				<Zoom right>
@@ -123,6 +134,7 @@ const Tetris = () => {
 									<Display text={`Score: ${score}`} />
 									<Display text={`rows: ${rows}`} />
 									<Display text={`Level: ${level}`} />
+									<Display text={`Down Speed: ${Math.round(dropTime)} ms`} />
 								</div>
 							)}
 						<StartButton callback={startGame} />

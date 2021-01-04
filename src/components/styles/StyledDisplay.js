@@ -4,7 +4,7 @@ export const StyledDisplay = styled.div`
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	margin: 0 0 1em 2em;
+	margin-bottom: 1em;
 	padding: 20px;
 	border: 3px solid #2a9d8f;
 	min-height: 30px;

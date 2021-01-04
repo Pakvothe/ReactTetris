@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const StyledStartButton = styled.button`
 	box-sizing: border-box;
-	margin: 0 0 1em 1.5em;
+	margin-bottom: 1em;
 	padding: 1.5em;
 	width: 100%;
 	border-radius: 20px;
@@ -21,8 +21,18 @@ const StyledStartButton = styled.button`
 	}
 `;
 
-const StartButton = ({ callback }) => (
-	<StyledStartButton onClick={callback}>Start Game</StyledStartButton>
-);
+const StartButton = ({ callback }) => {
+	const [count, setCount] = useState(true);
 
+	const onCount = () => {
+		setCount(!count);
+		callback();
+	}
+
+	return (
+		<StyledStartButton onClick={onCount}>
+			{count === true ? 'Start Game' : 'Reset Game'}
+		</StyledStartButton>
+	);
+}
 export default StartButton;
