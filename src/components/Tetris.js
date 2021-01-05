@@ -76,8 +76,6 @@ const Tetris = () => {
 		})
 	}, [])
 
-	//-------- <==
-
 	useEffect(() => {
 		if (gameOver) {
 			let objeto = {
@@ -102,11 +100,9 @@ const Tetris = () => {
 				setPuntaje(array);
 			}
 
-
 			const db = getFirestore();
 			const scores = db.collection('Tetris666').doc('FrancoTetris')
 			scores.update({
-				//counter: firebase.firestore.FieldValue.increment(1)
 				maxName: puntaje[0].user,
 				maxScore: puntaje[0].number,
 				secName: puntaje[1].user,
@@ -114,11 +110,14 @@ const Tetris = () => {
 				thirdName: puntaje[2].user,
 				thirdScore: puntaje[2].number,
 			}).then(() => (
-				console.log('rompiste un record')
+				dispatch(setButtonCount(true))
+			)).then(() => (
+				dispatch(setGameOver(true))
 			))
 		}
-	}, [gameOver])
+	}, [gameOver, dispatch, currentPlayer, puntaje, score])
 
+	//-------- <==
 
 	const movePlayer = dir => {
 		if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -275,7 +274,7 @@ const Tetris = () => {
 						<Zoom right>
 							<aside>
 								{gameOver ? (
-									<Display gameOver={gameOver} text="Game Over" />
+									<Display text="Game Over" />
 								) : (
 										<div>
 											<Display text={`Score: ${score}`} />

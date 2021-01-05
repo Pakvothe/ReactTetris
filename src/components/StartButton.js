@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setButtonCount } from '../redux/actions ';
@@ -34,15 +34,8 @@ export const StyledStartButton = styled.button`
 
 const StartButton = ({ callback }) => {
 	const dispatch = useDispatch();
-	const gameOver = useSelector(state => state.gameOver);
 	const buttonCount = useSelector(state => state.buttonCount);
 
-
-	useEffect(() => {
-		if (gameOver) {
-			dispatch(setButtonCount(true));
-		}
-	}, [gameOver])
 	const onCount = () => {
 		dispatch(setButtonCount(!buttonCount));
 		callback();
