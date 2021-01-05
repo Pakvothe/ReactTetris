@@ -280,7 +280,7 @@ const Tetris = () => {
 											<Display text={`Score: ${score}`} />
 											<Display text={`rows: ${rows}`} />
 											<Display text={`Level: ${level}`} />
-											<Display text={`Fall Speed: ${Math.round(dropTime)} ms`} />
+											<Display text={`Speed: ${Math.round(dropTime)} ms`} />
 										</div>
 									)}
 
