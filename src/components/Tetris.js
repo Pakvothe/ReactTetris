@@ -14,7 +14,7 @@ import { useInterval } from '../hooks/useInterval';
 import { usePlayer } from '../hooks/usePlayer';
 import { useStage } from '../hooks/useStage';
 import { useGameStatus } from '../hooks/useGameStatus';
-import { setDropTime, setGameOver, setCurrentPlayer } from '../redux/actions ';
+import { setDropTime, setGameOver, setCurrentPlayer, setButtonCount } from '../redux/actions ';
 
 // Components
 import Stage from './Stage';
@@ -141,6 +141,7 @@ const Tetris = () => {
 		setScore(0);
 		setLevel(0);
 		setRows(0);
+		dispatch(setButtonCount(false));
 		dispatch(setGameOver(false));
 	};
 

@@ -2,13 +2,14 @@ import {
 	SET_DROP_TIME,
 	SET_GAME_OVER,
 	SET_CURRENT_PLAYER,
+	SET_BUTTON_COUNT,
 } from '../constants';
 
 const initialState = {
 	dropTime: null,
 	gameOver: false,
 	currentPlayer: '',
-
+	buttonCount: true
 };
 
 const Reducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const Reducer = (state = initialState, action) => {
 			return {
 				...state,
 				currentPlayer: action.payload
+			}
+		case SET_BUTTON_COUNT:
+			return {
+				...state,
+				buttonCount: action.payload
 			}
 
 		default: return state;

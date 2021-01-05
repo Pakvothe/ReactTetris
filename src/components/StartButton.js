@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { setButtonCount } from '../redux/actions ';
 
 export const StyledStartButton = styled.button`
 	box-sizing: border-box;
@@ -31,16 +33,24 @@ export const StyledStartButton = styled.button`
 `;
 
 const StartButton = ({ callback }) => {
-	const [count, setCount] = useState(true);
+	const dispatch = useDispatch();
+	const gameOver = useSelector(state => state.gameOver);
+	const buttonCount = useSelector(state => state.buttonCount);
 
+
+	useEffect(() => {
+		if (gameOver) {
+			dispatch(setButtonCount(true));
+		}
+	}, [gameOver])
 	const onCount = () => {
-		setCount(!count);
+		dispatch(setButtonCount(!buttonCount));
 		callback();
 	}
 
 	return (
 		<StyledStartButton onClick={onCount}>
-			{count === true ? 'Start Game' : 'Reset Game'}
+			{buttonCount === true ? 'Start Game' : 'Reset Game'}
 		</StyledStartButton>
 	);
 }

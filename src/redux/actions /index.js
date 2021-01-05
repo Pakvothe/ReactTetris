@@ -1,4 +1,4 @@
-import { SET_GAME_OVER, SET_DROP_TIME, SET_CURRENT_PLAYER } from '../constants';
+import { SET_GAME_OVER, SET_DROP_TIME, SET_CURRENT_PLAYER, SET_BUTTON_COUNT } from '../constants';
 
 export const setDropTime = (payload) => {
 	return {
@@ -15,6 +15,12 @@ export const setGameOver = (payload) => {
 export const setCurrentPlayer = (payload) => {
 	return {
 		type: SET_CURRENT_PLAYER,
+		payload
+	}
+}
+export const setButtonCount = (payload) => {
+	return {
+		type: SET_BUTTON_COUNT,
 		payload
 	}
 }
