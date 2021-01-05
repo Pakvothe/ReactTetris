@@ -7,6 +7,7 @@ import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 import { StyledStartButton } from './StartButton';
 import Zoom from 'react-reveal/Zoom';
+import Swal from 'sweetalert2';
 
 // Custom Hooks
 import { useInterval } from '../hooks/useInterval';
@@ -194,7 +195,17 @@ const Tetris = () => {
 		dispatch(setCurrentPlayer(input));
 	}
 
-
+	const handleError = (e) => {
+		e.preventDefault();
+		Swal.fire({
+			heightAuto: false,
+			title: 'Error!',
+			text: 'Put a player name to play!',
+			icon: 'error',
+			confirmButtonText: 'Ok',
+			confirmButtonColor: '#ec85e1',
+		})
+	}
 
 	return (
 		<StyledTetrisWrapper
@@ -280,7 +291,7 @@ const Tetris = () => {
 
 									<StartButton type='submit' callback={startGame} />
 								) : (
-										<StyledStartButton className='btn-sec'>Start Game</StyledStartButton>
+										<StyledStartButton onClick={handleError} className='btn-sec'>Start Game</StyledStartButton>
 									)}
 							</form>
 						</aside>
