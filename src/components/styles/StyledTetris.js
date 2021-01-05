@@ -17,6 +17,11 @@ export const StyledTetris = styled.div`
 	margin: 0 auto;
 	width: 100vw;
 
+	.box_containers{
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
 	aside {
 		width: 100%;
 		max-width: 200px;
@@ -29,7 +34,32 @@ export const StyledTetris = styled.div`
 		flex-direction: column;
 		justify-content: space-between;
 		margin-left: 3em;
+		width: 100%;
 
+		.score_container{
+			margin-left: -3em;
+		}
+		.scores{
+			margin-left: -1em;
+			label{
+				font-weight: 600;
+			}
+			ul{
+				width: 10vw;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: flex-start;
+				margin-left: -2em;
+				list-style: none;
+
+				li{
+					padding: 0;
+					margin: 0;
+					text-align: center;
+				}
+			}
+		}
 		.box_info{
 			display: flex;
 			flex-direction: column;
@@ -42,6 +72,7 @@ export const StyledTetris = styled.div`
 			padding: 1em;
 			background-color: rgba(42, 157, 143,0.6);
 			color: white;
+			width: 100%;
 			
 			p {
 				text-align: center;
