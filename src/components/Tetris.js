@@ -264,7 +264,7 @@ const Tetris = () => {
 										</div>
 									</aside>
 									<aside className='box_info '>
-										<h4>Visitas </h4>
+										<h4>Visits</h4>
 										<p className='amarillo'>{visit}</p>
 									</aside>
 								</div>
