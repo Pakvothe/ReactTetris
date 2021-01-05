@@ -111,11 +111,18 @@ const Tetris = () => {
 				thirdScore: puntaje[2].number,
 			}).then(() => (
 				dispatch(setButtonCount(true))
-			)).then(() => (
-				dispatch(setGameOver(true))
-			))
+			)).then(
+				Swal.fire({
+					heightAuto: false,
+					title: 'New Score',
+					text: 'Congratz you beat a new score!',
+					icon: 'success',
+					confirmButtonText: 'Ok',
+					confirmButtonColor: '#ec85e1',
+				})
+			)
 		}
-	}, [gameOver, dispatch, currentPlayer, puntaje, score])
+	}, [gameOver, dispatch, currentPlayer, score])
 
 	//-------- <==
 
