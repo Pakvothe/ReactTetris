@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/ReactTetris/static/css/main.bdb593e6.chunk.css",
-    "main.js": "/ReactTetris/static/js/main.056c4c35.chunk.js",
-    "main.js.map": "/ReactTetris/static/js/main.056c4c35.chunk.js.map",
+    "main.js": "/ReactTetris/static/js/main.a07456c8.chunk.js",
+    "main.js.map": "/ReactTetris/static/js/main.a07456c8.chunk.js.map",
     "runtime-main.js": "/ReactTetris/static/js/runtime-main.8bd4c8e1.js",
     "runtime-main.js.map": "/ReactTetris/static/js/runtime-main.8bd4c8e1.js.map",
-    "static/js/2.cab1bf2a.chunk.js": "/ReactTetris/static/js/2.cab1bf2a.chunk.js",
-    "static/js/2.cab1bf2a.chunk.js.map": "/ReactTetris/static/js/2.cab1bf2a.chunk.js.map",
+    "static/js/2.ef15975c.chunk.js": "/ReactTetris/static/js/2.ef15975c.chunk.js",
+    "static/js/2.ef15975c.chunk.js.map": "/ReactTetris/static/js/2.ef15975c.chunk.js.map",
     "index.html": "/ReactTetris/index.html",
     "static/css/main.bdb593e6.chunk.css.map": "/ReactTetris/static/css/main.bdb593e6.chunk.css.map",
-    "static/js/2.cab1bf2a.chunk.js.LICENSE.txt": "/ReactTetris/static/js/2.cab1bf2a.chunk.js.LICENSE.txt",
+    "static/js/2.ef15975c.chunk.js.LICENSE.txt": "/ReactTetris/static/js/2.ef15975c.chunk.js.LICENSE.txt",
     "static/media/index.css": "/ReactTetris/static/media/Pixel-LCD-7.63d9c151.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.8bd4c8e1.js",
-    "static/js/2.cab1bf2a.chunk.js",
+    "static/js/2.ef15975c.chunk.js",
     "static/css/main.bdb593e6.chunk.css",
-    "static/js/main.056c4c35.chunk.js"
+    "static/js/main.a07456c8.chunk.js"
   ]
 }
