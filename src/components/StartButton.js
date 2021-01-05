@@ -17,6 +17,10 @@ export const StyledStartButton = styled.button`
 	transition: background .2s ease-in-out;
 	margin-top: 1em;
 
+	&:focus{
+		outline: none;
+ 		box-shadow: none;
+	}
 	&:hover{
 		background: #2a9d8f;
 	}

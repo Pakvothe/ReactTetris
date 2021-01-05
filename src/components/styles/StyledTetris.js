@@ -50,28 +50,7 @@ export const StyledTetris = styled.div`
 		margin-left: 3em;
 		width: 100%;
 		align-items: center;
-
-		.scores{
-			margin-left: -1em;
-
-			label{
-				font-weight: 600;
-			}
-			ul{
-				width: 10vw;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: flex-start;
-				list-style: none;
-
-				li{
-					padding: 0;
-					margin: 0;
-					text-align: center;
-				}
-			}
-		}
+	
 		.box_info{
 			display: flex;
 			flex-direction: column;
@@ -105,8 +84,34 @@ export const StyledTetris = styled.div`
 				font-weight: 600;
 	
 				&:hover {
-					color: #E9C46A;
+					color: #ec85e1;
 				}
+			}
+
+			ul {
+				list-style: none;
+			}
+
+			label {
+				display: block;
+				width: 100%;
+				text-align: center;
+			}
+
+			h2{
+				margin-bottom: 0.5em;
+			}
+			h4 {
+				text-align: center;
+				margin-bottom: 0.5em;
+			}
+			.amarillo{
+				color: #E9C46A;
+				font-weight: 600;
+			}
+
+			span {
+				font-size: 1.4em;
 			}
 		}
 	}

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { getFirestore } from '../firebase';
+import firebase from 'firebase/app';
 
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 import { StyledStartButton } from './StartButton';
-
 import Zoom from 'react-reveal/Zoom';
 
 // Custom Hooks
@@ -29,8 +30,92 @@ const Tetris = () => {
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
 	const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
 	const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
+	const [visit, setVisit] = useState(0)
+	const [puntaje, setPuntaje] = useState([
+		{
+			user: '',
+			number: 0
+		},
+		{
+			user: '',
+			number: 0
+		},
+		{
+			user: '',
+			number: 0
+		}
+	]);
+	//Firebase ==>
 
-	console.log('re-render');
+	useEffect(() => {
+		const db = getFirestore();
+		const scores = db.collection('Tetris666').doc('FrancoTetris')
+		scores.get().then(puntajes => {
+			scores.update({
+				visits: firebase.firestore.FieldValue.increment(1)
+			})
+			const data = puntajes.data();
+			setVisit(data.visits)
+			setPuntaje([
+				{
+					user: data.maxName,
+					number: data.maxScore
+				},
+				{
+					user: data.secName,
+					number: data.secScore
+				},
+				{
+					user: data.thirdName,
+					number: data.thirdScore
+				}
+			])
+		})
+	}, [])
+
+	//-------- <==
+
+	useEffect(() => {
+		if (gameOver) {
+			let objeto = {
+				user: currentPlayer,
+				number: score
+			}
+			let array = [...puntaje];
+
+			if (score > puntaje[0].number) {
+				array.unshift(objeto);
+				array.pop();
+				setPuntaje(array);
+			} else if (score > puntaje[1].number) {
+				array.pop();
+				let player = array.pop();
+				array.push(objeto);
+				array.push(player);
+				setPuntaje(array);
+			} else if (score > puntaje[2].number) {
+				array.pop();
+				array.push(objeto);
+				setPuntaje(array);
+			}
+
+
+			const db = getFirestore();
+			const scores = db.collection('Tetris666').doc('FrancoTetris')
+			scores.update({
+				//counter: firebase.firestore.FieldValue.increment(1)
+				maxName: puntaje[0].user,
+				maxScore: puntaje[0].number,
+				secName: puntaje[1].user,
+				secScore: puntaje[1].number,
+				thirdName: puntaje[2].user,
+				thirdScore: puntaje[2].number,
+			}).then(() => (
+				console.log('rompiste un record')
+			))
+		}
+	}, [gameOver])
+
 
 	const movePlayer = dir => {
 		if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -69,7 +154,6 @@ const Tetris = () => {
 		} else {
 			// Game over!
 			if (player.pos.y < 1) {
-				console.log('GAME OVER!!!');
 				dispatch(setGameOver(true));
 				dispatch(setDropTime(null));
 			}
@@ -101,15 +185,12 @@ const Tetris = () => {
 		}
 	};
 	const [input, setInput] = useState('');
-	console.log(currentPlayer)
 	const handleChange = (e) => {
-		console.log(e.target.value, 'asdasdas')
 		setInput(e.target.value);
 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(input, 'input')
 		dispatch(setCurrentPlayer(input));
 	}
 
@@ -129,27 +210,48 @@ const Tetris = () => {
 							<aside className='box_info'>
 								<h2>Tetris Game</h2>
 								<div>
-									<p>Created by</p>
+									<p>Developed by</p>
 									<p>Franco Ortiz</p>
 								</div>
-								<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer'> ~ Repository ~ </a>
+								<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer' className='amarillo'> ~ Repository ~ </a>
 							</aside>
 							<aside className='box_info'>
 								<h2>Controls</h2>
 								<div>
-									<p className='controls'><span>⇧ </span> = Spin Tetromino</p>
-									<p className='controls'><span>⇩ </span> = Fast Fall</p>
-									<p className='controls'><span>⇨ </span> = Right</p>
-									<p className='controls'><span>⇦ </span> = Left</p>
+									<p className='controls'><span className='amarillo'>⇧ </span>,  Spin Tetromino</p>
+									<p className='controls'><span className='amarillo'>⇩ </span>,  Fast Fall</p>
+									<p className='controls'><span className='amarillo'>⇨ </span>,  Right</p>
+									<p className='controls'><span className='amarillo'>⇦ </span>,  Left</p>
 								</div>
 							</aside>
 						</div>
 						<div className='info_container score_container'>
-							<aside className='box_info scores'>
-								<h2>Scores</h2>
-								<Score />
+							<aside className='box_info '>
+								<h2 >Scores</h2>
+								<div >
+									<ul>
+										<li>
+											<h4>Max Score</h4>
+											<p className='amarillo'>{puntaje[0].user}</p>
+											<p className='amarillo'>{puntaje[0].number}</p>
+										</li>
+										<li>
+											<h4>Second Score</h4>
+											<p className='amarillo'>{puntaje[1].user}</p>
+											<p className='amarillo'>{puntaje[1].number}</p>
+										</li>
+										<li>
+											<h4>Third Score</h4>
+											<p className='amarillo'>{puntaje[2].user}</p>
+											<p className='amarillo'>{puntaje[2].number}</p>
+										</li>
+									</ul>
+								</div>
 							</aside>
-
+							<aside className='box_info '>
+								<h4>Visitas </h4>
+								<p className='amarillo'>{visit}</p>
+							</aside>
 						</div>
 					</div>
 				</Zoom>
