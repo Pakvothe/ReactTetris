@@ -20,7 +20,7 @@ import { setDropTime, setGameOver, setCurrentPlayer } from '../redux/actions ';
 import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
-import Score from './Score';
+import Loading from './loading';
 
 const Tetris = () => {
 	const dispatch = useDispatch();
@@ -31,7 +31,8 @@ const Tetris = () => {
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
 	const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
 	const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(rowsCleared);
-	const [visit, setVisit] = useState(0)
+	const [loading, setLoading] = useState(true);
+	const [visit, setVisit] = useState(0);
 	const [puntaje, setPuntaje] = useState([
 		{
 			user: '',
@@ -52,6 +53,7 @@ const Tetris = () => {
 		const db = getFirestore();
 		const scores = db.collection('Tetris666').doc('FrancoTetris')
 		scores.get().then(puntajes => {
+			setLoading(false)
 			scores.update({
 				visits: firebase.firestore.FieldValue.increment(1)
 			})
@@ -208,97 +210,103 @@ const Tetris = () => {
 	}
 
 	return (
-		<StyledTetrisWrapper
-			role="button"
-			tabIndex="0"
-			onKeyDown={e => move(e)}
-			onKeyUp={keyUp}
-		>
-			<StyledTetris>
-				<Zoom left>
-					<div className='box_containers'>
-						<div className='info_container'>
-							<aside className='box_info'>
-								<h2>Tetris Game</h2>
-								<div>
-									<p>Developed by</p>
-									<p>Franco Ortiz</p>
+		<>
+			{loading === false ? (
+				<StyledTetrisWrapper
+					role="button"
+					tabIndex="0"
+					onKeyDown={e => move(e)}
+					onKeyUp={keyUp}
+				>
+					<StyledTetris>
+						<Zoom left>
+							<div className='box_containers'>
+								<div className='info_container'>
+									<aside className='box_info'>
+										<h2>Tetris Game</h2>
+										<div>
+											<p>Developed by</p>
+											<p>Franco Ortiz</p>
+										</div>
+										<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer' className='amarillo'> ~ Repository ~ </a>
+									</aside>
+									<aside className='box_info'>
+										<h2>Controls</h2>
+										<div>
+											<p className='controls'><span className='amarillo'>⇧ </span>,  Spin Tetromino</p>
+											<p className='controls'><span className='amarillo'>⇩ </span>,  Fast Fall</p>
+											<p className='controls'><span className='amarillo'>⇨ </span>,  Right</p>
+											<p className='controls'><span className='amarillo'>⇦ </span>,  Left</p>
+										</div>
+									</aside>
 								</div>
-								<a href='https://github.com/Pakvothe/ReactTetris' target='_blank' rel='noreferrer' className='amarillo'> ~ Repository ~ </a>
-							</aside>
-							<aside className='box_info'>
-								<h2>Controls</h2>
-								<div>
-									<p className='controls'><span className='amarillo'>⇧ </span>,  Spin Tetromino</p>
-									<p className='controls'><span className='amarillo'>⇩ </span>,  Fast Fall</p>
-									<p className='controls'><span className='amarillo'>⇨ </span>,  Right</p>
-									<p className='controls'><span className='amarillo'>⇦ </span>,  Left</p>
+								<div className='info_container score_container'>
+									<aside className='box_info '>
+										<h2 >Scores</h2>
+										<div >
+											<ul>
+												<li>
+													<h4>Max Score</h4>
+													<p className='amarillo'>{puntaje[0].user}</p>
+													<p className='amarillo'>{puntaje[0].number}</p>
+												</li>
+												<li>
+													<h4>Second Score</h4>
+													<p className='amarillo'>{puntaje[1].user}</p>
+													<p className='amarillo'>{puntaje[1].number}</p>
+												</li>
+												<li>
+													<h4>Third Score</h4>
+													<p className='amarillo'>{puntaje[2].user}</p>
+													<p className='amarillo'>{puntaje[2].number}</p>
+												</li>
+											</ul>
+										</div>
+									</aside>
+									<aside className='box_info '>
+										<h4>Visitas </h4>
+										<p className='amarillo'>{visit}</p>
+									</aside>
 								</div>
-							</aside>
-						</div>
-						<div className='info_container score_container'>
-							<aside className='box_info '>
-								<h2 >Scores</h2>
-								<div >
-									<ul>
-										<li>
-											<h4>Max Score</h4>
-											<p className='amarillo'>{puntaje[0].user}</p>
-											<p className='amarillo'>{puntaje[0].number}</p>
-										</li>
-										<li>
-											<h4>Second Score</h4>
-											<p className='amarillo'>{puntaje[1].user}</p>
-											<p className='amarillo'>{puntaje[1].number}</p>
-										</li>
-										<li>
-											<h4>Third Score</h4>
-											<p className='amarillo'>{puntaje[2].user}</p>
-											<p className='amarillo'>{puntaje[2].number}</p>
-										</li>
-									</ul>
-								</div>
-							</aside>
-							<aside className='box_info '>
-								<h4>Visitas </h4>
-								<p className='amarillo'>{visit}</p>
-							</aside>
-						</div>
-					</div>
-				</Zoom>
-				<Stage stage={stage} />
-				<Zoom right>
-					<aside>
-						{gameOver ? (
-							<Display gameOver={gameOver} text="Game Over" />
-						) : (
-								<div>
-									<Display text={`Score: ${score}`} />
-									<Display text={`rows: ${rows}`} />
-									<Display text={`Level: ${level}`} />
-									<Display text={`Fall Speed: ${Math.round(dropTime)} ms`} />
-								</div>
-							)}
-
-						<aside className='box_info' >
-							<form onSubmit={handleSubmit}>
-								{!currentPlayer ? (
-									<input className='user_input' onChange={handleChange} value={input} type='text' placeholder='Player Name' required />
+							</div>
+						</Zoom>
+						<Stage stage={stage} />
+						<Zoom right>
+							<aside>
+								{gameOver ? (
+									<Display gameOver={gameOver} text="Game Over" />
 								) : (
-										<h2 className='user_name'>{currentPlayer}</h2>
+										<div>
+											<Display text={`Score: ${score}`} />
+											<Display text={`rows: ${rows}`} />
+											<Display text={`Level: ${level}`} />
+											<Display text={`Fall Speed: ${Math.round(dropTime)} ms`} />
+										</div>
 									)}
-								{input.length > 2 ? (
 
-									<StartButton type='submit' callback={startGame} />
-								) : (
-										<StyledStartButton onClick={handleError} className='btn-sec'>Start Game</StyledStartButton>
-									)}
-							</form>
-						</aside>
-					</aside>
-				</Zoom>
-			</StyledTetris>
-		</StyledTetrisWrapper >
+								<aside className='box_info' >
+									<form onSubmit={handleSubmit}>
+										{!currentPlayer ? (
+											<input className='user_input' onChange={handleChange} value={input} type='text' placeholder='Player Name' required />
+										) : (
+												<h2 className='user_name'>{currentPlayer}</h2>
+											)}
+										{input.length > 2 ? (
+
+											<StartButton type='submit' callback={startGame} />
+										) : (
+												<StyledStartButton onClick={handleError} className='btn-sec'>Start Game</StyledStartButton>
+											)}
+									</form>
+								</aside>
+							</aside>
+						</Zoom>
+					</StyledTetris>
+				</StyledTetrisWrapper >
+			) : (
+					<Loading loading={loading} />
+				)}
+		</>
 	);
 };
 
