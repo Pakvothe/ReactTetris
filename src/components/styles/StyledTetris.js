@@ -17,6 +17,25 @@ export const StyledTetris = styled.div`
 	margin: 0 auto;
 	width: 100vw;
 
+	.user_name {
+		text-align: center;
+		color: #ec85e1;
+		letter-spacing: 1px;
+	}
+	.user_input {
+		width: 100%;
+		max-width: 200px;
+		border-radius: 20px;
+		background-color: rgba(255, 255, 255,0.9);
+		border: 3px solid #2a9d8f;
+		padding: 0.5em 1em;
+	}
+
+	.box_containers{
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
 	aside {
 		width: 100%;
 		max-width: 200px;
@@ -29,7 +48,9 @@ export const StyledTetris = styled.div`
 		flex-direction: column;
 		justify-content: space-between;
 		margin-left: 3em;
-
+		width: 100%;
+		align-items: center;
+	
 		.box_info{
 			display: flex;
 			flex-direction: column;
@@ -42,6 +63,7 @@ export const StyledTetris = styled.div`
 			padding: 1em;
 			background-color: rgba(42, 157, 143,0.6);
 			color: white;
+			width: 100%;
 			
 			p {
 				text-align: center;
@@ -62,8 +84,34 @@ export const StyledTetris = styled.div`
 				font-weight: 600;
 	
 				&:hover {
-					color: #E9C46A;
+					color: #ec85e1;
 				}
+			}
+
+			ul {
+				list-style: none;
+			}
+
+			label {
+				display: block;
+				width: 100%;
+				text-align: center;
+			}
+
+			h2{
+				margin-bottom: 0.5em;
+			}
+			h4 {
+				text-align: center;
+				margin-bottom: 0.5em;
+			}
+			.amarillo{
+				color: #E9C46A;
+				font-weight: 600;
+			}
+
+			span {
+				font-size: 1.4em;
 			}
 		}
 	}
