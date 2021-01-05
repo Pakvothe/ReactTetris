@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
+import { StyledStartButton } from './StartButton';
+
 import Zoom from 'react-reveal/Zoom';
 
 // Custom Hooks
@@ -10,18 +12,19 @@ import { useInterval } from '../hooks/useInterval';
 import { usePlayer } from '../hooks/usePlayer';
 import { useStage } from '../hooks/useStage';
 import { useGameStatus } from '../hooks/useGameStatus';
-import { setDropTime, setGameOver } from '../redux/actions ';
+import { setDropTime, setGameOver, setCurrentPlayer } from '../redux/actions ';
 
 // Components
 import Stage from './Stage';
 import Display from './Display';
 import StartButton from './StartButton';
-import Player from './player';
+import Score from './Score';
 
 const Tetris = () => {
 	const dispatch = useDispatch();
 	const dropTime = useSelector(state => state.dropTime);
 	const gameOver = useSelector(state => state.gameOver);
+	const currentPlayer = useSelector(state => state.currentPlayer);
 
 	const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
 	const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -97,6 +100,20 @@ const Tetris = () => {
 			}
 		}
 	};
+	const [input, setInput] = useState('');
+	console.log(currentPlayer)
+	const handleChange = (e) => {
+		console.log(e.target.value, 'asdasdas')
+		setInput(e.target.value);
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(input, 'input')
+		dispatch(setCurrentPlayer(input));
+	}
+
+
 
 	return (
 		<StyledTetrisWrapper
@@ -130,8 +147,9 @@ const Tetris = () => {
 						<div className='info_container score_container'>
 							<aside className='box_info scores'>
 								<h2>Scores</h2>
-								<Player />
+								<Score />
 							</aside>
+
 						</div>
 					</div>
 				</Zoom>
@@ -145,14 +163,29 @@ const Tetris = () => {
 									<Display text={`Score: ${score}`} />
 									<Display text={`rows: ${rows}`} />
 									<Display text={`Level: ${level}`} />
-									<Display text={`Down Speed: ${Math.round(dropTime)} ms`} />
+									<Display text={`Fall Speed: ${Math.round(dropTime)} ms`} />
 								</div>
 							)}
-						<StartButton callback={startGame} />
+
+						<aside className='box_info' >
+							<form onSubmit={handleSubmit}>
+								{!currentPlayer ? (
+									<input className='user_input' onChange={handleChange} value={input} type='text' placeholder='Player Name' required />
+								) : (
+										<h2 className='user_name'>{currentPlayer}</h2>
+									)}
+								{input.length > 2 ? (
+
+									<StartButton type='submit' callback={startGame} />
+								) : (
+										<StyledStartButton className='btn-sec'>Start Game</StyledStartButton>
+									)}
+							</form>
+						</aside>
 					</aside>
 				</Zoom>
 			</StyledTetris>
-		</StyledTetrisWrapper>
+		</StyledTetrisWrapper >
 	);
 };
 

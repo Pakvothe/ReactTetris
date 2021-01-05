@@ -1,11 +1,13 @@
 import {
 	SET_DROP_TIME,
 	SET_GAME_OVER,
+	SET_CURRENT_PLAYER,
 } from '../constants';
 
 const initialState = {
 	dropTime: null,
 	gameOver: false,
+	currentPlayer: '',
 
 };
 
@@ -21,6 +23,11 @@ const Reducer = (state = initialState, action) => {
 			return {
 				...state,
 				gameOver: action.payload
+			}
+		case SET_CURRENT_PLAYER:
+			return {
+				...state,
+				currentPlayer: action.payload
 			}
 
 		default: return state;

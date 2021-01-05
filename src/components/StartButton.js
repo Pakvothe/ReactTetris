@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledStartButton = styled.button`
+export const StyledStartButton = styled.button`
 	box-sizing: border-box;
 	margin-bottom: 1em;
 	padding: 1.5em;
@@ -15,9 +15,14 @@ const StyledStartButton = styled.button`
 	outline: none;
 	cursor: pointer;
 	transition: background .2s ease-in-out;
+	margin-top: 1em;
 
 	&:hover{
 		background: #2a9d8f;
+	}
+
+	&.btn-sec{
+		border: 3px solid #ec85e1;
 	}
 `;
 
