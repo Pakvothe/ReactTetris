@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFirestore } from '../firebase';
 import firebase from 'firebase/app';
-
 import { createStage, checkCollision } from '../gameHelpers';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 import { StyledStartButton } from './StartButton';
@@ -103,12 +102,12 @@ const Tetris = () => {
 			const db = getFirestore();
 			const scores = db.collection('Tetris666').doc('FrancoTetris')
 			scores.update({
-				maxName: puntaje[0].user,
-				maxScore: puntaje[0].number,
-				secName: puntaje[1].user,
-				secScore: puntaje[1].number,
-				thirdName: puntaje[2].user,
-				thirdScore: puntaje[2].number,
+				maxName: array[0].user,
+				maxScore: array[0].number,
+				secName: array[1].user,
+				secScore: array[1].number,
+				thirdName: array[2].user,
+				thirdScore: array[2].number,
 			}).then(() => (
 				dispatch(setButtonCount(true))
 			)).then(
@@ -120,7 +119,7 @@ const Tetris = () => {
 					confirmButtonText: 'Ok',
 					confirmButtonColor: '#ec85e1',
 				})
-			)
+			).then()
 		}
 	}, [gameOver, dispatch, currentPlayer, score])
 
