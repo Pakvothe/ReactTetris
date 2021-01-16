@@ -8,7 +8,8 @@
 -  **Firebase**
 
 ```sh
-Fully functional "Tetris" game, allows you to enter a player, break records, increase level and difficulty.
+Fully functional "Tetris" game,
+allows you to enter a player, break records, increase level and difficulty.
 Save records and visits to a "Firebase" cloud database.
  ```
 
