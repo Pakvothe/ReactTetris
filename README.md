@@ -27,6 +27,6 @@ Save records and visits to a "Firebase" cloud database.
 
 >ToDo: Implement styles for screens smaller than HD
 
- ##### Contact: Other Projects:
+ ##### Other Projects:
 
  - **You can see my other projects in my portfolio:**  `https://pakvothe.github.io/portfolio/`
