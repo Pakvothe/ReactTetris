@@ -26,3 +26,7 @@ Save records and visits to a "Firebase" cloud database.
 >Credits to https://github.com/weibenfalk, from whom I learned and used the base of tetris to later give it my touch and add functionalities.
 
 >ToDo: Implement styles for screens smaller than HD
+
+ ##### Contact: Other Projects:
+
+ - **You can see my other projects in my portfolio:**  `https://pakvothe.github.io/portfolio/`
