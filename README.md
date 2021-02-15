@@ -30,4 +30,4 @@ Save records and visits to a "Firebase" cloud database.
 
  ##### Other Projects:
 
- - **You can see my other projects in my portfolio:**  `https://pakvothe.github.io/portfolio/`
+ - **You can see my other projects in my portfolio:**  `https://franco-ortiz.com/`
